@@ -1,0 +1,10 @@
+# Identifiers that Discovery has deprecated or removed. `dft static` fails any agent
+# whose agent.yaml or tool.yaml still matches one of these patterns (Python regex).
+#
+# Empty on purpose: we don't have an authoritative list yet. Ask engineering
+# (Yousef/Preetish) which preview tools/functions are deprecated and add them here, e.g.
+#
+#   - pattern: '\bPreviewResourceV1\b'
+#     reason: removed in service release 2026-09
+#     replacement: PreviewResource
+deprecated: []

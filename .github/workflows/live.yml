@@ -1,0 +1,97 @@
+name: Live functional run (F1-F4)
+
+# Invokes real agents in a Discovery project. Manual only, behind the `discovery-live`
+# environment so a reviewer approves each run (it spends model tokens and node time).
+#
+# Repository variables (same as PR #100's Option B):
+#   AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID   (OIDC federated credential)
+#   DISCOVERY_WORKSPACE_API_URL                               (https://<ws>.workspace.discovery.azure.com)
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: Discovery project with the agents deployed
+        required: true
+      agents:
+        description: "Comma list of agents (blank = none)"
+        default: ""
+      kits:
+        description: "Comma list of starter kits (blank = none)"
+        default: ""
+      max_cases:
+        description: Upper bound on cases in this run
+        default: "10"
+      service_version:
+        description: Discovery service version under test (recorded for back-compat diffs)
+        default: ""
+      client_sha:
+        description: >-
+          Reviewed microsoft/discovery commit that contains PR #100's discovery_client.py.
+          Pinned so unreviewed code never runs with credentials. Switch to main once #100 merges.
+        default: 1036196be0e4e174430bb1b83a8cd31f0f71a594
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    environment: discovery-live
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check out the catalog (data only)
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/discovery
+          ref: main
+          path: catalog
+          lfs: false
+          persist-credentials: false
+
+      - name: Check out the pinned PR #100 client
+        uses: actions/checkout@v4
+        with:
+          repository: akoul-ms/discovery
+          ref: ${{ inputs.client_sha }}
+          path: client
+          sparse-checkout: utilities/agent-evaluation/evaluators
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e ".[live]"
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: dft live
+        env:
+          AGENTS: ${{ inputs.agents }}
+          KITS: ${{ inputs.kits }}
+        run: |
+          set +e
+          dft live --catalog catalog \
+            ${AGENTS:+--agents "$AGENTS"} ${KITS:+--kits "$KITS"} \
+            --workspace-api-url "${{ vars.DISCOVERY_WORKSPACE_API_URL }}" \
+            --project "${{ inputs.project }}" \
+            --client-dir client/utilities/agent-evaluation/evaluators \
+            --max-cases "${{ inputs.max_cases }}" \
+            --service-version "${{ inputs.service_version }}" \
+            --out out --yes
+          rc=$?
+          cat out/live-report.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null
+          exit $rc
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dft-live-${{ github.run_id }}
+          path: out/

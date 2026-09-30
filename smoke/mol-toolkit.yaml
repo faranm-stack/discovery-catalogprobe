@@ -1,0 +1,10 @@
+# In the Sep 25 RepoValidation run this agent answered the aspirin question by hand
+# arithmetic instead of running RDKit, which is exactly what F3 should flag.
+cases:
+  - id: aspirin-mw
+    prompt: >-
+      Using your compute tool and RDKit (not mental arithmetic), compute the average molecular
+      weight of aspirin, SMILES CC(=O)Oc1ccccc1C(=O)O, and write it to final_results.json.
+      Report the value in g/mol.
+    requires_tool: true
+    expect: ["180.1", g/mol]

@@ -1,0 +1,358 @@
+{
+  "meta": {
+    "kind": "static",
+    "catalog_commit": "9c1aea0ffac4d8b62d06d9eafbed91da75db4d6b",
+    "service_version": "",
+    "created_utc": "2026-09-30T22:45:04Z",
+    "dft_version": "0.1.0",
+    "scope": "agents=all kits=all",
+    "agents_checked": 91,
+    "kits_checked": 4,
+    "deprecations_loaded": 0
+  },
+  "findings": [
+    {
+      "check": "F0.bindings",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/core-python-agent",
+      "message": "toolId is a hard-coded resource id from a specific subscription; use a {{...ToolId}} placeholder.",
+      "path": "agents/core-python-agent/agent.yaml",
+      "line": null,
+      "evidence": {
+        "key": "hardcoded-toolid"
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/gromacs",
+      "message": "Instructions document run_analysis(kind, tpr, xtc, out_xvg, groups) but the real signature is run_analysis(kind, tpr, xtc, output_xvg, groups, extra_flags, tu); unknown name(s): out_xvg.",
+      "path": "agents/gromacs/agent.yaml",
+      "line": 44,
+      "evidence": {
+        "key": "doc-sig:run_analysis",
+        "unknown": [
+          "out_xvg"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/janus",
+      "message": "Instructions document validate_smiles(smi) but the real signature is validate_smiles(smiles); unknown name(s): smi.",
+      "path": "agents/janus/agent.yaml",
+      "line": 79,
+      "evidence": {
+        "key": "doc-sig:validate_smiles",
+        "unknown": [
+          "smi"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/janus",
+      "message": "Instructions document canonicalize_smiles(smi) but the real signature is canonicalize_smiles(smiles); unknown name(s): smi.",
+      "path": "agents/janus/agent.yaml",
+      "line": 80,
+      "evidence": {
+        "key": "doc-sig:canonicalize_smiles",
+        "unknown": [
+          "smi"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/janus",
+      "message": "Instructions document has_pfas_substructure(smi, smarts_patterns) but the real signature is has_pfas_substructure(smiles, smarts_patterns); unknown name(s): smi.",
+      "path": "agents/janus/agent.yaml",
+      "line": 82,
+      "evidence": {
+        "key": "doc-sig:has_pfas_substructure",
+        "unknown": [
+          "smi"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/janus",
+      "message": "Instructions document molecular_weight(smi) but the real signature is molecular_weight(smiles); unknown name(s): smi.",
+      "path": "agents/janus/agent.yaml",
+      "line": 85,
+      "evidence": {
+        "key": "doc-sig:molecular_weight",
+        "unknown": [
+          "smi"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/janus",
+      "message": "Instructions document score_property_target(smi, descriptor_fn, target, tolerance) but the real signature is score_property_target(smiles, descriptor_fn, target, tolerance); unknown name(s): smi.",
+      "path": "agents/janus/agent.yaml",
+      "line": 86,
+      "evidence": {
+        "key": "doc-sig:score_property_target",
+        "unknown": [
+          "smi"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/lammps",
+      "message": "Instructions document run_command(command_list) but the real signature is run_command(command, cwd); unknown name(s): command_list.",
+      "path": "agents/lammps/agent.yaml",
+      "line": 220,
+      "evidence": {
+        "key": "doc-sig:run_command",
+        "unknown": [
+          "command_list"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/lammps",
+      "message": "Instructions document plot_stress_strain(data, output_file, modulus_result) but the real signature is plot_stress_strain(stress_strain_data, output_file, title, modulus_result); unknown name(s): data.",
+      "path": "agents/lammps/agent.yaml",
+      "line": 262,
+      "evidence": {
+        "key": "doc-sig:plot_stress_strain",
+        "unknown": [
+          "data"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "error",
+      "category": "definition",
+      "subject": "agents/mol-toolkit",
+      "message": "Example call generate_conformers(...) in the instructions would fail: unknown keyword(s) num_conformers. Real signature: generate_conformers(smiles, max_conformers, prune_rms_threshold) in molecular_utils.py:199.",
+      "path": "agents/mol-toolkit/agent.yaml",
+      "line": 106,
+      "evidence": {
+        "key": "bad-call:generate_conformers:unknown keyword(s) num_conformers",
+        "signature": [
+          "smiles",
+          "max_conformers",
+          "prune_rms_threshold"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "error",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Example call plot_similarity_matrix(...) in the instructions would fail: unknown keyword(s) output_path. Real signature: plot_similarity_matrix(similarity, labels, output_file, title, figsize) in nucleotide_tf_utils.py:731.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 103,
+      "evidence": {
+        "key": "bad-call:plot_similarity_matrix:unknown keyword(s) output_path",
+        "signature": [
+          "similarity",
+          "labels",
+          "output_file",
+          "title",
+          "figsize"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "error",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Example call plot_embedding_scatter(...) in the instructions would fail: unknown keyword(s) output_path. Real signature: plot_embedding_scatter(embeddings_2d, labels, cluster_labels, output_file, title, figsize) in nucleotide_tf_utils.py:682.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 132,
+      "evidence": {
+        "key": "bad-call:plot_embedding_scatter:unknown keyword(s) output_path",
+        "signature": [
+          "embeddings_2d",
+          "labels",
+          "cluster_labels",
+          "output_file",
+          "title",
+          "figsize"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document find_similar_sequences(query_embedding, database_embeddings, labels, top_k, metric) but the real signature is find_similar_sequences(query_embedding, reference_embeddings, labels, top_k); unknown name(s): database_embeddings, metric.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 77,
+      "evidence": {
+        "key": "doc-sig:find_similar_sequences",
+        "unknown": [
+          "database_embeddings",
+          "metric"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document cluster_sequences(embeddings, n_clusters, method, min_clusters, max_clusters) but the real signature is cluster_sequences(embeddings, n_clusters, method, random_state); unknown name(s): min_clusters, max_clusters.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 78,
+      "evidence": {
+        "key": "doc-sig:cluster_sequences",
+        "unknown": [
+          "min_clusters",
+          "max_clusters"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document plot_embedding_scatter(embeddings_2d, labels, title, output_path) but the real signature is plot_embedding_scatter(embeddings_2d, labels, cluster_labels, output_file, title, figsize); unknown name(s): output_path.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 82,
+      "evidence": {
+        "key": "doc-sig:plot_embedding_scatter",
+        "unknown": [
+          "output_path"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document plot_similarity_matrix(similarity, labels, title, output_path) but the real signature is plot_similarity_matrix(similarity, labels, output_file, title, figsize); unknown name(s): output_path.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 83,
+      "evidence": {
+        "key": "doc-sig:plot_similarity_matrix",
+        "unknown": [
+          "output_path"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document plot_token_probabilities(predictions, output_path) but the real signature is plot_token_probabilities(predictions, output_file, title, figsize); unknown name(s): output_path.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 84,
+      "evidence": {
+        "key": "doc-sig:plot_token_probabilities",
+        "unknown": [
+          "output_path"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/nucleotide-tf",
+      "message": "Instructions document plot_sequence_stats(sequences, labels, output_path) but the real signature is plot_sequence_stats(sequences, labels, output_file); unknown name(s): output_path.",
+      "path": "agents/nucleotide-tf/agent.yaml",
+      "line": 85,
+      "evidence": {
+        "key": "doc-sig:plot_sequence_stats",
+        "unknown": [
+          "output_path"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/pdb-insights",
+      "message": "Instructions document get_uniprot_ids_from_pdb(pdbid) but the real signature is get_uniprot_ids_from_pdb(pdb_id); unknown name(s): pdbid.",
+      "path": "agents/pdb-insights/agent.yaml",
+      "line": 67,
+      "evidence": {
+        "key": "doc-sig:get_uniprot_ids_from_pdb",
+        "unknown": [
+          "pdbid"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/pdb-insights",
+      "message": "Instructions document calculate_quality_score(entry) but the real signature is calculate_quality_score(r); unknown name(s): entry.",
+      "path": "agents/pdb-insights/agent.yaml",
+      "line": 96,
+      "evidence": {
+        "key": "doc-sig:calculate_quality_score",
+        "unknown": [
+          "entry"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/rnaseq",
+      "message": "Instructions document plot_feature_importance(en_result, xgb_result, output_file, n_top) but the real signature is plot_feature_importance(elastic_net_result, xgboost_result, output_file, n_top, title); unknown name(s): en_result, xgb_result.",
+      "path": "agents/rnaseq/agent.yaml",
+      "line": 72,
+      "evidence": {
+        "key": "doc-sig:plot_feature_importance",
+        "unknown": [
+          "en_result",
+          "xgb_result"
+        ]
+      }
+    },
+    {
+      "check": "F0.calls",
+      "severity": "warning",
+      "category": "definition",
+      "subject": "agents/rnaseq",
+      "message": "Instructions document assemble_handoff_artifact(de_results, wgcna_result, en_result, xgb_result, phenotype_summary, dataset_info, output_path) but the real signature is assemble_handoff_artifact(de_results, wgcna_result, elastic_net_result, xgboost_result, phenotype_summary, dataset_info, output_path); unknown name(s): en_result, xgb_result.",
+      "path": "agents/rnaseq/agent.yaml",
+      "line": 75,
+      "evidence": {
+        "key": "doc-sig:assemble_handoff_artifact",
+        "unknown": [
+          "en_result",
+          "xgb_result"
+        ]
+      }
+    }
+  ],
+  "cases": []
+}

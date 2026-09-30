@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "discovery-functional-tests"
+version = "0.1.0"
+description = "Functional tests for Microsoft Discovery agents and starter kits"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6"]
+
+[project.optional-dependencies]
+# Live runs reuse PR #100's data-plane client, which needs these.
+live = ["aiohttp>=3.9", "azure-identity>=1.15"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+dft = "dft.cli:main"
+
+[tool.setuptools]
+packages = ["dft"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

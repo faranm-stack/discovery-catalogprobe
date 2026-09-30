@@ -1,0 +1,9 @@
+# Curated smoke case: one small, checkable task that needs the tool to run.
+cases:
+  - id: equilibrium-methane-air
+    prompt: >-
+      Use your equilibrate action to compute the chemical equilibrium of a stoichiometric
+      methane-air mixture (composition 'CH4:1, O2:2, N2:7.52') at 1500 K and 101325 Pa.
+      Report the equilibrium mole fractions of CO2 and H2O from final_results.json.
+    requires_tool: true
+    expect: [co2, h2o, mole fraction]

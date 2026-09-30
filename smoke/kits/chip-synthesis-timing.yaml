@@ -1,0 +1,5 @@
+# Which deployed agent gets each sample prompt. Needed because services deploy a kit
+# as separate agents. Prompts not listed are routed automatically (named agent, else primary).
+routes:
+  sp-2: opensta   # static timing analysis
+  sp-5: opensta   # "run STA at 200 MHz"; needs a netlist from rtl-yosys-syn first
