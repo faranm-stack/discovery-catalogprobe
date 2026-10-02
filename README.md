@@ -1,6 +1,9 @@
-# discovery-functional-tests (`dft`)
+# Discovery CatalogProbe
 
-Automated **functional** testing for Microsoft Discovery agents and starter kits.
+Automated **functional** testing for Microsoft Discovery agents and starter kits. The CLI is `dft`.
+
+Sister tool: [Discovery SciProbe](https://github.com/faranm-stack/discovery-sciprobe) checks that answers are
+scientifically right; CatalogProbe checks that agents and kits work.
 
 The repo's existing checks (#132: schema, YAML, policy) prove an agent *loads*. They
 don't prove Discovery can *use* it. `dft` answers the second question:

@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "discovery-functional-tests"
+name = "discovery-catalogprobe"
 version = "0.1.0"
-description = "Functional tests for Microsoft Discovery agents and starter kits"
+description = "Discovery CatalogProbe: functional tests for Microsoft Discovery agents and starter kits"
 requires-python = ">=3.10"
 dependencies = ["pyyaml>=6"]
 
